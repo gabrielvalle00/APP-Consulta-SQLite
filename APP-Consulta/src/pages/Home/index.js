@@ -3,7 +3,8 @@ import { StyleSheet, TouchableOpacity, View, Text, Image, ScrollView } from 'rea
 import { useNavigation } from '@react-navigation/native';
 import { initDatabase } from '../../database/database.js';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Card, Title, Paragraph } from 'react-native-paper';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import Detalhes from '../Detalhes/index.js';
 
 export default function Home() {
     useEffect(() => {
@@ -22,7 +23,17 @@ export default function Home() {
 
             <ScrollView style={styles.scrollView}>
                 <View style={styles.header}>
-                    <Text style={styles.headerText}>depois eu arrumo ksksks</Text>
+
+                    <Image
+                        source={require('../../assets/7632726.jpg')}
+                        style={styles.home}
+                    />
+
+
+                    <TouchableOpacity onPress={() => navigateToDetails()} style={styles.input}>
+                        <FontAwesome6 name="gear" size={44} color="#00CED1" />
+                    </TouchableOpacity>
+
                 </View>
 
 
@@ -42,29 +53,17 @@ const styles = StyleSheet.create({
     header: {
         marginBottom: 10,
     },
-    headerText: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
     scrollView: {
         flex: 1,
         marginBottom: 20,
     },
-    categoryContainer: {
-        marginBottom: 20,
+    home: {
+        right: 65,
+        width: 500,
+        height: 300
     },
-    categoryText: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 10,
-        marginLeft: 10,
-    },
-    card: {
-        width: 150,
-        height: 250,
-        backgroundColor: 'white',
-        marginBottom: 10,
-        marginRight: 10,
-    },
+    input: {
+        marginTop: 280,
+        marginLeft:330
+    }
 });

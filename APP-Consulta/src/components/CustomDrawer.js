@@ -4,10 +4,10 @@ import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawe
 
 export default function CustomDrawer(props) {
     return (
-        <DrawerContentScrollView {...props}>
+        <DrawerContentScrollView {...props} style={{ backgroundColor: '#00CED1' }}>
             <View style={styles.headerContainer}>
                 <Image
-                    source={require('../assets/steam.jpg')}
+                    source={require('../assets/836.jpg')}
                     style={styles.profileImage}
                 />
                 <Text style={styles.profileText}>Gabriel Valle</Text>

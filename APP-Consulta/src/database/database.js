@@ -37,6 +37,7 @@ export const inserirClienteTelefone = (nome_cliente, genero, data_nasc, numero, 
           'INSERT INTO clientes (nome_cliente, genero, data_nasc) VALUES (?, ?, ?)',
           [nome_cliente, genero, data_nasc],
           (_, { insertId: clienteId }) => {
+
             
             tx.executeSql(
               'INSERT INTO telefones (numero, tipo) VALUES (?, ?)',
@@ -72,7 +73,10 @@ export const buscarClientesTelefones = () => {
     db.transaction(
       tx => {
         tx.executeSql(
-          'SELECT clientes.id AS cliente_id, clientes.nome_cliente, clientes.genero, clientes.data_nasc, telefones.id AS telefone_id, telefones.numero, telefones.tipo FROM clientes JOIN telefones_has_clientes ON clientes.id = telefones_has_clientes.cliente_id JOIN telefones ON telefones_has_clientes.telefone_id = telefones.id;',
+              
+           `SELECT clientes.id AS cliente_id, clientes.nome_cliente, clientes.genero, clientes.data_nasc, telefones.id AS telefone_id,
+            telefones.numero, telefones.tipo FROM clientes JOIN telefones_has_clientes ON clientes.id = telefones_has_clientes.cliente_id
+             JOIN telefones ON telefones_has_clientes.telefone_id = telefones.id;`,
           [],
           (_, result) => resolve(result),
           (_, error) => reject(error)
@@ -82,6 +86,26 @@ export const buscarClientesTelefones = () => {
     );
   });
 };
+
+
+
+export const buscar = (filtro) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `SELECT clientes.id AS cliente_id, clientes.nome_cliente, clientes.genero, clientes.data_nasc, telefones.id AS telefone_id, telefones.numero, telefones.tipo 
+         FROM clientes 
+         JOIN telefones_has_clientes ON clientes.id = telefones_has_clientes.cliente_id 
+         JOIN telefones ON telefones_has_clientes.telefone_id = telefones.id 
+         WHERE clientes.nome_cliente LIKE ? OR clientes.genero LIKE ? OR clientes.data_nasc LIKE ? OR telefones.numero LIKE ? OR telefones.tipo LIKE ?`,
+        [`%${filtro}%`, `%${filtro}%`, `%${filtro}%`, `%${filtro}%`, `%${filtro}%`],
+        (_, result) => resolve(result),
+        (_, error) => reject(error)
+      );
+    });
+  });
+};
+
 
 
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, Animated, Dimensions, TouchableOpacity, Alert } from 'react-native';
-import { buscarClientesTelefones, deletarClienteTelefone } from '../../database/database';
+import { buscarClientesTelefones, deletarClienteTelefone, atualizarClienteTelefone } from '../../database/database';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 
 const windowWidth = Dimensions.get('window').width;
@@ -71,13 +71,14 @@ const VisualizarClientesTelefonesScreen = ({ navigation }) => {
     <View style={styles.card}>
       <Text style={styles.title}>Clientes e Telefones</Text>
       <View style={styles.itemContainer}>
+      <Text style={styles.itemText}>ID: {item.cliente_id}</Text>
         <Text style={styles.itemText}>Nome: {item.nome_cliente}</Text>
         <Text style={styles.itemText}>Gênero: {item.genero}</Text>
         <Text style={styles.itemText}>Data de Nascimento: {item.data_nasc}</Text>
-        <Text style={styles.itemText}>Telefone: {item.numero} ({item.tipo})</Text>
+        <Text style={styles.itemText}>{item.tipo}: {item.numero} </Text>
         <View style={styles.buttonsContainer}>
           <TouchableOpacity onPress={() => Editar(item)} style={styles.button}>
-            <FontAwesome6 name="pencil" size={24} color="darkblue" />
+            <FontAwesome6 name="pencil" size={24} color="lightgreen" />
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => handleExcluir(item.id)} style={styles.button}>
@@ -105,15 +106,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F8F8F8',
+    backgroundColor: '#f8f8f8f8',
   },
   card: {
     backgroundColor: '#fff',
     borderRadius: 10,
-    padding: 20,
+    padding: 30,
+    marginTop:20,
     width: windowWidth * 0.9,
     elevation: 3,
-    shadowColor: '#000',
+    shadowColor: '#00CED1',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -127,12 +129,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
-    color: '#778899',
+    color: '#00CED1',
   },
   itemContainer: {
     marginBottom: 20,
   },
   itemText: {
+    color: '#00CED1',
     fontSize: 16,
     marginBottom: 5,
   },
@@ -144,7 +147,7 @@ const styles = StyleSheet.create({
   button: {
     padding: 10,
     borderRadius: 5,
-    borderWidth: 1,
+    
   },
 });
 

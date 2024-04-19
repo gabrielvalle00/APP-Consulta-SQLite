@@ -24,6 +24,7 @@ export default function Routes() {
     <Drawer.Navigator
 
       drawerContent={CustomDrawer}
+      
 
     >
 
@@ -31,8 +32,8 @@ export default function Routes() {
         name='Home'
         component={StackRoutes}
         options={{
-          drawerActiveTintColor: '#708090',
-          drawerInactiveTintColor: '#778899',
+          drawerActiveTintColor: '#ff8c00',
+          drawerInactiveTintColor: '#ffff',
           drawerIcon: ({ color, size }) => {
             return <FontAwesome6 name='house' color={color} size={size}></FontAwesome6>
 
@@ -45,8 +46,8 @@ export default function Routes() {
         name='Adicionar'
         component={Adicionar}
         options={{
-          drawerActiveTintColor: '#708090',
-          drawerInactiveTintColor: '#778899',
+          drawerActiveTintColor: '#ff8c00',
+          drawerInactiveTintColor: '#ffff',
           drawerIcon: ({ color, size }) => {
             return <FontAwesome6 name='users' color={color} size={size}></FontAwesome6>
 
@@ -60,8 +61,8 @@ export default function Routes() {
         name='Visualizar'
         component={Editar}
         options={{
-          drawerActiveTintColor: '#708090',
-          drawerInactiveTintColor: '#778899',
+          drawerActiveTintColor: '#ff8c00',
+          drawerInactiveTintColor: '#ffff',
           drawerIcon: ({ color, size }) => {
             return <FontAwesome6 name='eye' color={color} size={size}></FontAwesome6>
 
@@ -75,8 +76,8 @@ export default function Routes() {
         name='Pesquisar'
         component={Pesquisa}
         options={{
-          drawerActiveTintColor: '#708090',
-          drawerInactiveTintColor: '#778899',
+          drawerActiveTintColor: '#ff8c00',
+          drawerInactiveTintColor: '#ffff',
           drawerIcon: ({ color, size }) => {
             return <FontAwesome6 name='magnifying-glass' color={color} size={size}></FontAwesome6>
 

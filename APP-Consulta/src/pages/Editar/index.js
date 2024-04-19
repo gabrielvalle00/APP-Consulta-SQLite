@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity, Animated, Dimensions, Platform } from 'react-native';
-import { atualizarClienteTelefone } from '../../database/database';
+import { buscarClientesTelefones, atualizarClienteTelefone } from '../../database/database';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 
 const windowWidth = Dimensions.get('window').width;
 
 const AtualizarClienteTelefoneScreen = () => {
-    const route = useRoute();
-    const item = route.params;
-    const navigation = useNavigation();
+  const route = useRoute();
+  const item = route.params;
+  const navigation = useNavigation();
 
-  const [clienteId, setClienteId] = useState('');
+  const [clienteId, setClienteId] = useState(item.cliente_id);
+  const [telefoneId, setTelefoneId] = useState(item.telefone_id);
   const [novoNomeCliente, setNovoNomeCliente] = useState(item.nome_cliente);
   const [novoGenero, setNovoGenero] = useState(item.genero);
   const [novoDataNasc, setNovoDataNasc] = useState(item.data_nasc);
@@ -48,11 +49,11 @@ const AtualizarClienteTelefoneScreen = () => {
     try {
       await atualizarClienteTelefone(clienteId, novoNomeCliente, novoGenero, novoDataNasc, telefoneId, novoNumero, novoTipo);
       Alert.alert('Sucesso', 'Cliente e telefone atualizados com sucesso.');
-      // Limpar campos após a atualização
+      
       setClienteId('');
       setNovoNomeCliente('');
       setNovoGenero('');
-      setNovoDataNasc();
+      setNovoDataNasc('');
       setTelefoneId('');
       setNovoNumero('');
       setNovoTipo('');
@@ -66,13 +67,7 @@ const AtualizarClienteTelefoneScreen = () => {
     <Animated.View style={[styles.container, { opacity: animacaoCard }]}>
       <View style={styles.card}>
         <Text style={styles.title}>Atualizar Cliente e Telefone</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="ID do Cliente"
-          value={clienteId}
-          onChangeText={setClienteId}
-          keyboardType="numeric"
-        />
+        
         <TextInput
           style={styles.input}
           placeholder="Novo Nome do Cliente"
@@ -88,10 +83,10 @@ const AtualizarClienteTelefoneScreen = () => {
         <TextInput
           style={styles.input}
           placeholder="Nova Data"
-          value={novoGenero}
+          value={novoDataNasc}
           onChangeText={setNovoDataNasc}
         />
-        
+
         <TextInput
           style={styles.input}
           placeholder="Novo Número de Telefone"
@@ -144,7 +139,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
-    color: '#778899', 
+    color: '#00CED1',
   },
   input: {
     marginBottom: 10,
@@ -158,7 +153,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: '#778899', 
+    backgroundColor: '#00CED1',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,

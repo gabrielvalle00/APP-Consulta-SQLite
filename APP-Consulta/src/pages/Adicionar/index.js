@@ -35,7 +35,7 @@ const InserirClienteTelefoneScreen = () => {
     try {
       await inserirClienteTelefone(nomeCliente, genero, dataNasc, numeroTelefone, tipoTelefone);
       Alert.alert('Sucesso', 'Cliente e telefone inseridos com sucesso.');
-      // Limpar campos após a inserção
+     
       setNomeCliente('');
       setGenero('');
       setDataNasc('');
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
-    color: '#778899', 
+    color: '#00CED1', 
   },
   input: {
     marginBottom: 10,
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: '#778899', 
+    backgroundColor: '#00CED1', 
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,

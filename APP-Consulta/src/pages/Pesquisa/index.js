@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, StyleSheet, TouchableOpacity, Animated, Dimensions } from 'react-native';
-import { buscarClientesTelefones } from '../../database/database';
+import { buscar} from '../../database/database';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -11,7 +11,7 @@ const BuscaClienteTelefoneScreen = () => {
 
   const buscarClientesTelefonesDB = async () => {
     try {
-      const resultadoBusca = await buscarClientesTelefones();
+      const resultadoBusca = await buscar(termoBusca);
       setResultados(resultadoBusca.rows._array);
     } catch (error) {
       console.error('Erro ao buscar clientes e telefones:', error);
@@ -51,7 +51,12 @@ const BuscaClienteTelefoneScreen = () => {
             keyExtractor={(item) => item.cliente_id.toString()}
             renderItem={({ item }) => (
               <TouchableOpacity style={styles.resultadoItem}>
-                <Text style={styles.resultadoText}>{item.nome_cliente} - {item.numero}</Text>
+
+                <Text style={styles.resultadoText}>ID: {item.cliente_id}</Text>           
+                <Text style={styles.resultadoText}>Nome: {item.nome_cliente}</Text>
+                <Text style={styles.resultadoText}>Data de Nascimento: {item.data_nasc}</Text>
+                <Text style={styles.resultadoText}>{item.tipo}: {item.numero}</Text>
+
               </TouchableOpacity>
             )}
           />
@@ -74,7 +79,7 @@ const styles = StyleSheet.create({
     padding: 20,
     width: windowWidth * 0.9,
     elevation: 3,
-    shadowColor: '#000',
+    shadowColor: '#00CED1',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -87,39 +92,41 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
-    color: '#778899', 
+    color: '#00CED1',
   },
   input: {
+    color:'black',
     marginBottom: 10,
     padding: 10,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: 'black',
     borderRadius: 5,
   },
   button: {
-    backgroundColor: '#778899',
+    backgroundColor: '#00CED1',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
     alignItems: 'center',
   },
   buttonText: {
-    color: '#fff',
+    color: '#ffff',
     fontSize: 16,
   },
   resultadoItem: {
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: 'black',
   },
   resultadoText: {
+    color:'black',
     fontSize: 16,
   },
   noResultsText: {
     textAlign: 'center',
     marginTop: 20,
     fontSize: 16,
-    color: '#778899',
+    color: 'black',
   },
 });
 
