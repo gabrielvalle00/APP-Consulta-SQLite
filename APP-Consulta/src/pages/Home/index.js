@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View, Text, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { initDatabase } from '../../database/database.js';
+import { initDatabase, buscarClientesTelefones, deletarClienteTelefone, atualizarClienteTelefone } from '../../database/database.js';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Detalhes from '../Detalhes/index.js';
@@ -9,6 +9,9 @@ import Detalhes from '../Detalhes/index.js';
 export default function Home() {
     useEffect(() => {
         initDatabase();
+        buscarClientesTelefones();
+        deletarClienteTelefone();
+        atualizarClienteTelefone()
     }, []);
 
     const navigation = useNavigation();

@@ -33,7 +33,7 @@ const VisualizarClientesTelefonesScreen = ({ navigation }) => {
           onPress: async () => {
             try {
               // Encontrar o cliente e telefone associados ao ID do item
-              const itemExcluir = clientesTelefones.find(item => item.id === id);
+              const itemExcluir = clientesTelefones.find(item => item.cliente_id === id);
               const cliente_id = itemExcluir.cliente_id;
               const telefone_id = itemExcluir.telefone_id;
 
@@ -55,7 +55,7 @@ const VisualizarClientesTelefonesScreen = ({ navigation }) => {
 
   useEffect(() => {
     buscarClientesTelefonesDB();
-  }, []);
+  }, [buscarClientesTelefonesDB]);
 
   const fadeIn = () => {
     Animated.timing(animacao, {
@@ -81,7 +81,7 @@ const VisualizarClientesTelefonesScreen = ({ navigation }) => {
             <FontAwesome6 name="pencil" size={24} color="lightgreen" />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => handleExcluir(item.id)} style={styles.button}>
+          <TouchableOpacity onPress={() => handleExcluir(item.cliente_id)} style={styles.button}>
             <FontAwesome6 name="trash-alt" size={24} color="red" />
           </TouchableOpacity>
         </View>
@@ -94,7 +94,7 @@ const VisualizarClientesTelefonesScreen = ({ navigation }) => {
       <FlatList
         data={clientesTelefones}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.cliente_id}
         
       />
     </View>
